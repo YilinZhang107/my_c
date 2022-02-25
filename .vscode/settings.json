@@ -1,7 +1,7 @@
 {
     "files.autoSave": "onFocusChange",
     "explorer.confirmDelete": false,
-    "editor.fontSize": 20,
+    "editor.fontSize": 17,
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "stdlib.h": "c",
