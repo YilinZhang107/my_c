@@ -58,7 +58,7 @@ public:
                 char f = force[i][0];
                 res[i] = f;
                 int ni = (f == 'L') ? (i - 1) : (i + 1);
-                if (ni >= 0 and ni < n) {
+                if (ni >= 0 && ni < n) {
                     int t = time[i];
                     if (time[ni] == -1) {
                         q.emplace(ni);
