@@ -5,7 +5,9 @@ using namespace std;
 int n,m,k;
 
 
-int main(){
-
-    return 0;
-}
+class Solution {
+public:
+    int lengthLongestPath(string input) {
+        
+    }
+};pta

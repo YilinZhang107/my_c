@@ -1,13 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+#define endl '\n'
+#define bug(a) cout<<#a<<": "<<a<<endl
 #define N 510
-/*éœ€è¦çš„æ•°ç»„
-dis[] åˆå§‹ç‚¹åˆ°è¿™ç‚¹è·ç¦»
-edges[][] é‚»æ¥çŸ©é˜µ
-pre[]  å‰ä¸€ä¸ªç‚¹
-look[] è¿™ä¸ªç‚¹æœ‰æ²¡æœ‰è¢«è®¿é—®è¿‡
-å…¶ä»–å…·ä½“åˆ†æ
+/*ĞèÒªµÄÊı×é
+dis[] ³õÊ¼µãµ½Õâµã¾àÀë
+edges[][] ÁÚ½Ó¾ØÕó
+pre[]  Ç°Ò»¸öµã
+look[] Õâ¸öµãÓĞÃ»ÓĞ±»·ÃÎÊ¹ı
+ÆäËû¾ßÌå·ÖÎö
 */
 
 int dis[N],edges[N][N] ,fire[N],rootCnt[N], pre[N],  fireSum[N];
@@ -15,15 +16,19 @@ int look[N];
 int n,m,s,d;
 
 void dijkstra(int s, int d){
+    memset(dis, 0x3f, sizeof(dis));//Õâ¸öÊı×éµÄ´óĞ¡Êµ¼ÊÉÏÊÇ510*4(intÎª4)¸ö×Ö½Ú
+    dis[s] = 0;
     fireSum[s] = fire[s];
     rootCnt[s] = 1;
     for(int i=0;i<n;i++){
         int k = -1;
         for(int j=0; j<n;j++){
+        	bug(dis[j]);
+        	bug(dis[k]);
             if(!look[j] && (k == -1 || dis[j]<dis[k]))
                 k = j;
         }
-        look[k] = true;//ä¸€æ—¦é€‰å‡º,è¿™ä¸ªdis[k]å°±æ˜¯åˆ°kçš„æœ€å°è·ç¦»
+        look[k] = true;//Ò»µ©Ñ¡³ö,Õâ¸ödis[k]¾ÍÊÇµ½kµÄ×îĞ¡¾àÀë
         for(int j=0;j<n;j++){
             if(dis[j] == dis[k]+edges[k][j]){
                 rootCnt[j]+=rootCnt[k];
@@ -45,7 +50,7 @@ int main(){
     int t;
     cin>>n>>m>>s>>d;
     for(int i=0;i<n;i++) scanf("%d", &fire[i]);
-    memset(edges, 0x3f, sizeof edges);//å’Œä¸‹é¢çš„ä¸¤ç§å†™æ³•éƒ½å¯ä»¥,0x3få¯ä½œæœ€å¤§å€¼
+    memset(edges, 0x3f, sizeof edges);//ºÍÏÂÃæµÄÁ½ÖÖĞ´·¨¶¼¿ÉÒÔ,0x3f¿É×÷×î´óÖµ
     for(int i=0;i<m;i++){
         int a,b;
         scanf("%d %d %d",&a,&b,&t);
@@ -53,15 +58,14 @@ int main(){
         edges[b][a] = t;
     }
     //init
-    memset(dis, 0x3f, sizeof(dis));//è¿™ä¸ªæ•°ç»„çš„å¤§å°å®é™…ä¸Šæ˜¯510*4(intä¸º4)ä¸ªå­—èŠ‚
-    dis[s] = 0;
+   
     
     dijkstra(s,d);
     
     cout<<rootCnt[d]<<" "<<fireSum[d]<<endl;
     stack<int> path;
     t = d;
-    while(t != s){//å°†è·¯å¾„å€’è¿‡æ¥è¾“å‡º
+    while(t != s){//½«Â·¾¶µ¹¹ıÀ´Êä³ö
         path.push(t);
         t = pre[t];
     }
