@@ -1,74 +1,85 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define vi vector<int>
+#define MAX 99999999
+#define INF 0x3f
+#define endl '\n'
+#define _for(i,a,b) for(int i=a;i<b;i++)
+#define rep(i,a,b) for(int i=a; i<=b;i++)
+#define bug(a)  cout<<#a<<": "<<a<<endl;
+#define pb push_back
+#define mp make_pair
+int n,m,k;
+//不知道哪错了14分
 
-vector<string> xings;
-vector<string> mings;
-vector<string> ans;
+//int fa[100005];
+unordered_map<string, string> xu;
 
-void check(string& n1, string&x1, string& n2, string& x2){
-    int find1 = -1, find2=-1, s1=-1, s2=-1; // 0 女, 1男
-    for(int i=0; i<mings.size(); i++){
-        if(mings[i] == n1){
-            if(xings[i] == x1+"sson"){
-                s1 = 1;
-                find1 = i;
-            }
-            else if(xings[i] == x1+"sdottir"){
-                s1 = 0;
-                find1 = i;
-            }
-        }
-        else if(mings[i] == n2){
-            if(xings[i] == x2+"sson"){
-                s2 = 1;
-                find2 = i;
-            }
-            else if(xings[i] == x2+"sdottir"){
-                s2 = 0;
-                find2 = i;
-            }
-        }
-    }
-    if(find1==-1 || find2 == -1){
-        ans.push_back("NA");
-        return;
-    }
-    if(s1 == s2){
-        ans.push_back("Whatever")
-        return ;
-    }
-    set<string> pub;
-    int dai = 1;
-    while(dai++ <5){
-        if(pub.count(x1) || pub.count(x2)){
-            ans.push_back("NO");
-            return 0;
-        }
-        for(int )
-        pub.insert()
-
-    }
-        
+//void uni()
+unordered_map<string,int> xin;
+void mfind(string s){
+	
 }
 
 int main(){
-    int n;
     cin>>n;
-    string xing, ming;
-    for(int i=0; i<n; i++){
-        cin>>ming>>xing;   
-        mings.push_back(ming);
-        xings.push_back(xing);
-    }
+    string a,b;
+//    _for(i,0,n){
+//    	fa[i] = i;
+//	}
+	_for(i,0,n){
+		cin>>a>>b;
+		if(b.find("sson") != string::npos){
+			xu[a] = b.substr(0,b.size()-4);
+			xin[a] = 1;
+//			bug(xu[a]);
+		}else if(b.find("sdottir") != string::npos){
+			xu[a] = b.substr(0,b.size()-7);
+			xin[a] = 0;
+//			bug(xu[a]);
+		}else{
+			xu[a] = a;
+			xin[a] = 1;
+//			bug(xu[a]);
+		}
+	}
+	cin>>m;
+	string c,d;
+	_for(i,0,m){
+		cin>>a>>b>>c>>d;
+		if(!xu.count(a) || !xu.count(c)) {
+			cout<<"NA"<<endl;
+		}else if(xin[a] == xin[c]){
+			cout<<"Whatever"<<endl;
+		}else{
+			set<string> zx;
+			int dai = 1;
+			while(xu[a] != a && dai<5){
+				zx.insert(a);
+				a = xu[a];
+				dai++;
+			}
+			if(dai != 5)
+				zx.insert(a);
+			dai = 1;
+			int f =1;
+			while(xu[c] != c && dai<5){
+				if(zx.count(c)){
+					f =0;
+					break;
+				}
+				c = xu[c];
+				dai++;
+			}
+			if(dai != 5){
+				if(zx.count(c))
+					f =0;
+			}
+		
+			if(f) cout<<"Yes"<<endl;
+			else cout<<"No"<<endl;
+		}
+	}
 
-    // int m;
-    cin>>n;
-    getchar();
-    string n1, n2, x1,x2;
-    for(int i=0; i<n; i++){
-        cin>>n1>>x1>>n2>>x2;
-
-    }
-    
     return 0;
 }
