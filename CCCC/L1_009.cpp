@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-int zi[105],mu[105],fu[105];
-int ans=0;
+long long zi[105],mu[105],fu[105];
+long long ans=0;
 int main(){
     int n;
     cin>>n;
@@ -37,10 +37,12 @@ int main(){
         ansf = -1;
         ans*=-1;
     }   
-    int zheng = ans/sum;
-    cout<<zheng<<" ";
+    int zheng = 0;
+    if(ans>=sum)
+        zheng = ans/sum;
+    // cout<<zheng<<" ";
     ans%=sum;
-    cout<<ans<<" ";
+    // cout<<ans<<" ";
     for(int i=2;i<=ans;i++){
         // cout<<sum%i<<""<<ans%i<<endl;
         if(sum%i==0 && ans%i==0){
@@ -49,11 +51,15 @@ int main(){
             i=2;
         }
     }
-    if(zheng == 0){
-        cout<<ans<<"/"<<sum;
+    if(zheng == 0 && ans ==0){
+        cout<<0;
+        
     }else if(ans == 0){
         cout<<zheng;
-    }else{
-        cout<<zheng<<" "<<ans<<"/"<<sum;
+    }else if(zheng ==0)
+        cout<<ans*ansf<<"/"<<sum;
+
+    else{
+        cout<<zheng<<" "<<ans*ansf<<"/"<<sum;
     }
 }

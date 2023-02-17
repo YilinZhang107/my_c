@@ -6,6 +6,6 @@ int n,m,k;
 
 
 int main(){
-
+    
     return 0;
 }
