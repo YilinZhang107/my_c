@@ -2,5 +2,7 @@
 using namespace std;
 
 int main(){
-    cout<<fixed<<setprecision(3)<<double(17.0/6)<<endl;
+    string s = "121";
+    cout<<stoi(s,0,8);
+    return 0;
 }
