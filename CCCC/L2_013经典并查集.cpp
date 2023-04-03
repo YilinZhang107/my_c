@@ -13,7 +13,10 @@ void init(){
     for(int i=0;i<n;i++){fa[i] = i;}
 }
 int  find(int v){
-    while(fa[v] != v ){v = fa[v];}return v;
+    while(fa[v] != v ){
+        v = fa[v];
+    }
+    return v;
 }
 void uni(int a,int b){ //注意它的写法
     a = find(a);
