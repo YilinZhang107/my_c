@@ -1,36 +1,46 @@
-# include <iostream>
-# include <algorithm>
-# include <vector>
-# define maxn 300010
+#include<bits/stdc++.h>
 using namespace std;
-int n, x;
-int minx = maxn;
-vector<int>book;
-int visit[35] = { 0 };
-void DFS(int sum, int t)
-{
-	if (sum >= x) {
-		minx = min(minx, sum);
-		return;
-	}
-	for (int i = t; i < book.size(); i++) {
-		if (visit[i] == 0) {   //如果这本书没被取
-			visit[i] = 1;   //取这本书
-			DFS(sum + book[i], i); //进入递归
-			visit[i] = 0; //出递归后恢复没被取的状态
-		}
-	}
+
+struct BiTree{
+    int val;
+    BiTree *left,*right;
+};
+void insert(BiTree *t,int data){
+    if(t==NULL){
+        t = new BiTree();
+        t->left = t->right = NULL;
+        t->val = data; 
+    }
+    else if(t->val<data)
+        insert(t->right,data);
+    else if(t->val>data){
+        insert(t->left,data);
+    }
 }
-int main()
-{
-	cin >> n >> x;
-	int y;
-	for (int i = 0; i < n; i++) {
-		cin >> y;
-		book.push_back(y);
-	}
-	DFS(0,0);
-	cout << minx << endl;
-	book.push_back()
-	return 0;
+ BiTree* creat(vector<int> v){
+     BiTree *t = NULL;
+    //  cout<<t->left;
+     for(int i=0;i<v.size();i++){
+         insert(t,v[i]);
+     }
+     return t;
+ }
+ void Inorder(BiTree* t){
+     if(t==NULL)
+         return;
+     Inorder(t->left);
+     cout<<t->val<<" ";
+     Inorder(t->right);
+ }
+int main(){
+    vector<int> v;
+    int n,t;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>t;
+        v.push_back(t);
+    }
+    BiTree *T = creat(v);
+    Inorder(T);
+    return 0;
 }
